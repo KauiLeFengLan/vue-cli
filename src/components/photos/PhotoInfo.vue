@@ -8,11 +8,11 @@
     <hr>
     <!-- 缩略图区域 -->
 <div class="thumbs">
-  <img class="preview-img" v-for="(item, index) in list" :src="item.src" height="100" @click="$preview.open(index, list)" :key="index">
+  <vue-preview :slides="list" @close="handleClose" ></vue-preview>
 </div>
 
     <!-- 图片内容区域 -->
-    <!-- <div class="content" v-html="photoinfo.content" :key="item.id"></div> -->
+    <div class="content" v-html="photoinfo.content"></div>
     <!-- 放置一个现成的 评论子组件 -->
     <!-- <cmt-box :id="id"></cmt-box> -->
     <cmt-box :id="id"></cmt-box>
@@ -49,11 +49,15 @@ export default {
                 result.body.message.forEach(item => {
                     item.w = 600;
                     item.h = 400;
+                    item.msrc = item.src
                 });
                 // 把完整的数据保存到 list 中
                 this.list = result.body.message;
                 }
             });
+            },
+            handleClose(){
+                console.log("this.handleClose")
             }
         
     },
@@ -63,28 +67,38 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.photoinfo-container{
-    padding: 3px;
-    h3{
-        color: #26a2ff;
-        font-size: 15px;
-        text-align: center;
-        margin: 15px 0;
-    }
-    .subtitle{
-        display: flex;
-        justify-content: space-between;
-        font-size: 13px;
-    }
-    .content{
-        font-size: 13px;
-        line-height: 30px;
-    }
-    .thumbs {
-            img {
-                margin: 10px;
-                box-shadow: 0 0 8px #999;
-            }
-    }
+.photoinfo-container {
+  padding: 3px;
+  h3 {
+    color: #26a2ff;
+    font-size: 15px;
+    text-align: center;
+    margin: 15px 0;
+  }
+  .subtitle {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+  }
+  .content {
+    font-size: 13px;
+    line-height: 30px;
+  }
 }
+ 
+/deep/ .my-gallery{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        figure{
+            padding: 10px;
+            display: inline-block;
+            margin: 0;
+            width: 33.33%;
+           img {
+                width: 100%;
+            }
+        }
+    }
+
 </style>

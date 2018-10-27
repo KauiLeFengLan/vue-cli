@@ -3,7 +3,11 @@
 		<div class="app-container">
       <!-- 顶部区域 -->
 
-      <mt-header fixed title="黑马程序员·Vue项目"></mt-header>
+      <mt-header fixed title="黑马程序员·Vue项目">
+         <span slot="left" @click="goBack" v-show="flag">
+            <mt-button icon="back">返回</mt-button>
+         </span>
+      </mt-header>
 
       <!-- 中间区域 -->
 
@@ -16,8 +20,8 @@
 
       <!-- 底部区域 -->
 		<nav class="mui-bar mui-bar-tab boutt">
-			<router-link class="mui-tab-item-llb" to="/home">
-				<span class="mui-icon mui-icon-home"></span>
+			<router-link class="mui-tab-item-llb" to="/home" >
+				<span class="mui-icon mui-icon-home "></span>
 				<span class="mui-tab-label">首页</span>
 			</router-link>
 			<router-link class="mui-tab-item-llb" to="/member">
@@ -26,7 +30,7 @@
 			</router-link>
 			<router-link class="mui-tab-item-llb" to="shopcar">
 				<span class="mui-icon mui-icon-extra mui-icon-extra-cart">
-          <span class="mui-badge">0</span>
+          <span class="mui-badge" id="badge">{{ $store.getters.getAllCount }}</span>
         </span>
 				<span class="mui-tab-label">购物车</span>
 			</router-link>
@@ -40,8 +44,33 @@
 </template>
 
 <script>
-
+export default {
+    data(){
+        return {
+            flag:false
+        }
+    },
+    created(){
+        this.flag = this.$route.path === '/home' ? false : true;
+        
+    },
+    methods:{
+        goBack(){ //点击后退
+            this.$router.go(-1);
+        }
+    },
+    watch:{
+        '$route.path':function(newVal){
+            if(newVal === '/home') {
+                this.flag = false;
+            }else {
+                this.flag = true;
+            }
+        }
+    }
+}
 </script>
+
 
 <style lang="less" scoped>
 .mint-header {

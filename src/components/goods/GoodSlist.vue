@@ -1,7 +1,7 @@
 <template>
     <div class="goods-list" >
-        <router-link class="goods-item" v-for="item in goodslist" :key="item.id"
-        :to="'/home/goodLinfo' + item.id">
+        <div class="goods-item" v-for="(item,index) in goodslist" 
+        :key="index" @click="goDetail(item.id)">
             <img :src="item.img_url" alt="">
             <h1 class="title">{{ item.title }}</h1>
             <div class="info">
@@ -14,7 +14,7 @@
                     <span>剩{{ item.stock_quantity }}件</span>
                 </p>
             </div>
-        </router-link>
+        </div>
          <mt-button type="primary" size="large" @click="postGoodSlist">加载更多</mt-button>
     </div>
 </template>
@@ -45,9 +45,17 @@
          postGoodSlist(){
             this.pageindex++;
             this.getGoodSlist()
-        }
+        },
+        goDetail(id) {
+    // 1. 最简单的
+    // this.$router.push("/home/goodsinfo/" + id);
+    // 2. 传递对象
+    // this.$router.push({ path: "/home/goodsinfo/" + id });
+    // 3. 传递命名的路由(需要在定义的路由规则对象中添加name属性)
+    this.$router.push({ name: "goodlinfo", params: { id } });
+} 
      },
-        
+      
  }
  </script>
 

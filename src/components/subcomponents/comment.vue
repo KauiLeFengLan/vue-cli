@@ -37,7 +37,7 @@ export default {
                     // console.log(result.body.message)
                     // this.comments = result.body.message;
                     this.comments = this.comments.concat(result.body.message)
-                    console.log( this.comments)
+                    // console.log( this.comments)
                 }else {
                     Toast('获取评论失败!');
                 }

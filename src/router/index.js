@@ -12,10 +12,13 @@ Vue.use(Router)
 
 import NewsList from '../components/news/NewsList'
 import Newsinfo from '../components/news/Newsinfo'
-import GoodSlist from '../components/goods/GoodSlist'
-import GoodLinfo from '../components/goods/GoodLinfo'
 import PhotoList from '../components/photos/PhotoList'
 import PhotoInfo from '../components/photos/PhotoInfo'
+import GoodSlist from '../components/goods/GoodSlist'
+import GoodLinfo from '../components/goods/GoodLinfo'
+import GoodsDesc from '../components/goods/GoodsDesc.vue'
+import GoodsComment from '../components/goods/GoodsComment.vue'
+
 export default new Router({
     routes: [
         { path: '/home', component: HomeContainer },
@@ -24,11 +27,14 @@ export default new Router({
         { path: '/shopcar', component: ShopcarContainer },
         { path: '/home/newslist', component: NewsList },
         { path: '/home/newsinfo/:id', component: Newsinfo },
-        { path: '/home/goodslist', component: GoodSlist },
-        { path: '/home/goodLinfo/:id', component: GoodLinfo },
         { path: '/home/Photolist', component: PhotoList },
         { path: '/home/PhotoInfo/:id', component: PhotoInfo },
+        { path: '/home/goodslist', component: GoodSlist },
+        { path: '/home/goodLinfo/:id', component: GoodLinfo, name: 'goodlinfo' },
+        { path: '/home/goodsdesc/:id', component: GoodsDesc, name: 'goodsdesc' },
+        { path: '/home/goodscomment/:id', component: GoodsComment, name: 'goodscomment' },
         { path: '*', redirect: '/home' }
     ],
+
     linkActiveClass: 'mui-active' //覆盖默认的路由高亮的类,默认的类叫做,link-active-aclass
 })

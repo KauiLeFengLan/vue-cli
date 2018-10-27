@@ -1,11 +1,10 @@
 <template>
     <div>
         <!-- 轮播图区域 -->
-        <mt-swipe :auto="4000">
-            <mt-swipe-item v-for="(item) in lunbotuList" :key="item.img">
-                <img :src="item.img" >
-            </mt-swipe-item>
-        </mt-swipe>
+        <swiper :lunbotuList="lunbotuList" :isfunll="true"></swiper>
+
+
+
         <!-- 九宫格区域 -->
         <div class="mui-content">
 		        <ul class="mui-table-view mui-grid-view mui-grid-9">
@@ -42,6 +41,7 @@
 <script>
 import { Toast } from 'mint-ui';
 // import { Swipe, SwipeItem } from 'mint-ui';
+import swiper from '../subcomponents/swiper';
 export default{
     data() {
         return{
@@ -65,6 +65,9 @@ export default{
                 }
             })
         }
+    },
+    components:{
+        swiper
     }
 }
 </script>
